@@ -47,11 +47,11 @@ var fetchWeather = function(city) {
 };
 
 // UI implementation
-var setData = function({ city, temp, humid, desc }) {
+var setData = function({ city, temp, humid, desc, country }) {
   city = city.charAt(0).toUpperCase() + city.slice(1);
   $(".advance-search > .row").removeClass("dN");
   $("#cityholder")
-    .text(`Weather in ${city}`)
+    .text(`Weather in ${city}, ${country}`)
     .css("color", "#999");
   $("#temp").text(`${temp} degree celcius`);
   $("#humid").text(`${humid} percent`);

@@ -16,12 +16,13 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(__dirname + "/public/favicon.png"));
 
-function sendData(city, { temp, humid, desc }) {
+function sendData(city, { temp, humid, desc, country }) {
   return {
     city: city,
     temp: temp,
     humid: humid,
-    desc: desc
+    desc: desc,
+    country: country
   };
 }
 
@@ -55,9 +56,11 @@ const getWeather = async function(req, res) {
     let objData = {
       temp: data.main.temp,
       humid: data.main.humidity,
-      desc: data.weather[0].description
+      desc: data.weather[0].description,
+      country: data.sys.country
     };
     // client.HMSET(city.trim().toLowerCase(), objData);
+    console.log(data);
     res.send(sendData(city, objData));
   } catch (error) {
     console.log(error);
