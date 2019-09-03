@@ -3,6 +3,8 @@ const fetch = require("node-fetch");
 const redis = require("redis");
 const path = require("path");
 
+const favicon = require("express-favicon");
+
 const appid = "082ba4ed05108a707d6a811fd235e709";
 const PORT = process.env.PORT || 3000;
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
@@ -12,6 +14,7 @@ const client = redis.createClient(REDIS_PORT);
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(__dirname + "/public/favicon.png"));
 
 function sendData(city, { temp, humid, desc }) {
   return {
